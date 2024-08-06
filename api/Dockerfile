@@ -179,6 +179,7 @@ WORKDIR /usr/share/opensearch
 
 RUN bin/opensearch-plugin install analysis-phonetic
 RUN bin/opensearch-plugin install analysis-icu
+RUN bin/opensearch-plugin install --batch ingest-attachment
 
 FROM docker.elastic.co/elasticsearch/elasticsearch:${ELASTIC7_VERSION} AS gally_elasticsearch7
 
