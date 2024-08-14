@@ -30,7 +30,26 @@ variable "location" {
 }
 
 variable "gally_version" {
-    description = "Gally version to deploy"
-    type = string
-    default = "latest"
+  description = "Gally version to deploy"
+  type        = string
+  default     = "2.0"
 }
+
+variable "postgres_version" {
+  description = "Postgres version to deploy"
+  type        = string
+  default     = "16"
+}
+
+variable "redis_version" {
+  description = "Redis version to deploy"
+  type        = string
+  default     = "6.2"
+}
+
+variable "composer_auth" {
+  description = "Composer auth"
+  type        = object({})
+  default     = {}
+}
+
