@@ -1,4 +1,5 @@
 # general todo:
+# purge varnish not working when we launch  .bin/console h:f:l
 # https not working
 # add managed service for redis and postgres
 # move the tfstate in secure place and then remove it from .gitignore ?
@@ -645,7 +646,8 @@ resource "azurerm_container_app" "web" {
 
   depends_on = [
     azurerm_container_app.pwa,
-    docker_image.build_images["router"] #todo if image is updated this resource should be replaced, not working
+    docker_image.build_images["router"], #todo if image is updated this resource should be replaced, not working
+    docker_image.build_images["php"]     #todo if image is updated this resource should be replaced, not working
   ]
 }
 
@@ -718,7 +720,7 @@ resource "azurerm_container_app" "varnish" {
   }
 
   depends_on = [
-    azurerm_container_app.varnish,
+    azurerm_container_app.web,
     docker_image.build_images["varnish"] #todo if image is updated this resource should be replaced, not working
   ]
 }
