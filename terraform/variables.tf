@@ -15,7 +15,7 @@ variable "gally_prefix" {
 }
 
 variable "project_name" {
-  description = "Your project name (shou)"
+  description = "Your project name"
   type        = string
 
   validation {
@@ -35,12 +35,6 @@ variable "gally_version" {
   default     = "2.0"
 }
 
-variable "postgres_version" {
-  description = "Postgres version to deploy"
-  type        = string
-  default     = "16"
-}
-
 variable "redis_version" {
   description = "Redis version to deploy"
   type        = string
@@ -49,7 +43,75 @@ variable "redis_version" {
 
 variable "composer_auth" {
   description = "Composer auth"
-  type        = object({})
-  default     = {}
+  type        = string
+  default     = ""
+}
+
+variable "postgres" {
+  description = "Postgres config"
+  type        = map(string)
+  default = {
+    version  = "16"
+    db       = "api"
+    user     = "api"
+    password = "ChangeMe"
+    charset  = "utf8"
+  }
+}
+
+variable "php" {
+  description = "php config"
+  type        = map(string)
+  default = {
+    app_env    = "prod"
+    app_secret = "!ChangeMe!"
+  }
+}
+
+variable "containers" {
+  description = "containers config"
+  type        = map(object({ label : string, exposed_port : number, target_port : number }))
+  default = {
+    database = {
+      label        = "database"
+      exposed_port = 5432
+      target_port  = 5432
+    }
+    redis = {
+      label        = "redis"
+      exposed_port = 6379
+      target_port  = 6379
+    }
+    search = {
+      label        = "search"
+      exposed_port = 9200
+      target_port  = 9200
+    }
+    search-ml = {
+      label        = "search-ml"
+      exposed_port = 9200
+      target_port  = 9200
+    }
+    pwa = {
+      label        = "pwa"
+      exposed_port = 3000
+      target_port  = 3000
+    }
+    php = {
+      label        = "php"
+      exposed_port = 9000
+      target_port  = 9000
+    }
+    router = {
+      label        = "router"
+      exposed_port = 80
+      target_port  = 80
+    }
+    varnish = {
+      label        = "varnish"
+      exposed_port = 80
+      target_port  = 8080
+    }
+  }
 }
 

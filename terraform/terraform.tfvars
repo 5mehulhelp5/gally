@@ -1,3 +1,3 @@
-project_name = "boitsTerraform"
+project_name = "boitsTerra"
 location     = "francecentral"
 
